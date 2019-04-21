@@ -33,7 +33,7 @@ http://xxx:port/kiali/console
 
 [root@localhost templates]# kubectl create secret generic kiali -n istio-system --from-literal "username=admin" --from-literal "passphrase=admin"
 
-
+#restart the kaili servce
 [root@localhost templates]# kubectl delete pods kiali-5df77dc9b6-tjt65 -n istio-system
 
 
