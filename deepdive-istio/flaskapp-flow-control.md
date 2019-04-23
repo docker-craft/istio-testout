@@ -83,11 +83,11 @@ spec:
         - destination:
             host: flaskapp.default.svc.cluster.local
             subset: v1
-          weight: 70
+          weight: 90
         - destination:
             host: flaskapp.default.svc.cluster.local
             subset: v2
-          weight: 30
+          weight: 10
 
 
 [root@localhost chapter7]# kubectl exec -it -c sleep $SOURCE_POD bash
@@ -104,7 +104,12 @@ v2
 bash-4.4# http --body http://flaskapp/env/version
 v1
 
-
+bash-4.4# for i in `seq 100`; do http --body http://flaskapp/env/version; done | awk -F"v1" '{print NF-l}'
+87
+bash-4.4# for i in `seq 10`; do http --body http://flaskapp/env/version; done | awk -F"v1" '{print NF-l}'
+7
+bash-4.4# for i in `seq 10`; do http --body http://flaskapp/env/version; done | awk -F"v1" '{print NF-l}'
+8
 
 ```
 
